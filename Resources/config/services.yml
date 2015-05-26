@@ -1,0 +1,9 @@
+services:
+#    daemon_simplify.example:
+#        class: DaemonSimplifyBundle\Example
+#        arguments: [@service_id, "plain_value", %parameter%]
+
+    daemon_simplify_translator:
+        class: Daemon\SimplifyBundle\Component\SimplifyTranslator
+        arguments:
+            - @translator

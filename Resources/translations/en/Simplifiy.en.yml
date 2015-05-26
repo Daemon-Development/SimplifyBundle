@@ -1,0 +1,7 @@
+daemon:
+    simplify: Daemon Development SimplifyBundle
+
+
+entity:
+    error:
+        not_found: Unable to find entity of type "%className%" with %id%.

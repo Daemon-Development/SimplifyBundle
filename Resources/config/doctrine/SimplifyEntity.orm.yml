@@ -1,0 +1,21 @@
+Daemon\SimplifyBundle\Entity\SimplifyEntity:
+    type: mappedSuperclass
+    id:
+        id:
+            type: integer
+            id: true
+            generator:
+                strategy: AUTO
+    fields:
+        created_at:
+            type: datetime
+            gedmo:
+                timestampable:
+                    on: create
+        updated_at:
+            type: datetime
+            nullable: truew
+            gedmo:
+                timestampable:
+                    on: update
+    lifecycleCallbacks: {  }

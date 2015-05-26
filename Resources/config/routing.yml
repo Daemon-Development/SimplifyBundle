@@ -1,0 +1,3 @@
+daemon_simplify_homepage:
+    path:     /hello/{name}
+    defaults: { _controller: DaemonSimplifyBundle:Default:index }
