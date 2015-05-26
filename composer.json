@@ -1,0 +1,34 @@
+{
+  "name":        "daemon/simplify-bundle",
+  "type":        "symfony-bundle",
+  "description": "This bundle simplifies the CRUD generation by optimising the base crud actions and form building",
+  "keywords":    ["daemon", "crud", "form", "debug", "symfony", "bundle", "twig"],
+  "homepage":    "http://github.com/Daemon-Development/SimplifyBundle",
+  "license":     "MIT",
+
+  "authors": [
+    {
+      "name": "Christian Hessel",
+      "homepage": "http://github.com/Daemon-Development/"
+    },
+    {
+      "name": "Symfony Community",
+      "homepage": "http://github.com/barelon/CgKintBundle"
+    }
+  ],
+
+  "require": {
+    "php":                      ">=5.5.24",
+    "symfony/framework-bundle": ">=2.7.0"
+  },
+
+  "minimum-stability": "dev",
+
+  "autoload": {
+    "psr-0": {
+      "daemon\\SimplifyBundle": ""
+    }
+  },
+
+  "target-dir": "daemon/SimplifyBundle"
+}
