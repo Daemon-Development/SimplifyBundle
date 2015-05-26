@@ -26,9 +26,9 @@
 
   "autoload": {
     "psr-0": {
-      "daemon\\SimplifyBundle": ""
+      "Daemon\\SimplifyBundle": ""
     }
   },
 
-  "target-dir": "daemon/SimplifyBundle"
+  "target-dir": ""
 }
