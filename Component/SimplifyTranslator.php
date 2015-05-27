@@ -8,6 +8,14 @@ namespace Daemon\SimplifyBundle\Component;
 use Symfony\Component\Translation\DataCollectorTranslator;
 use Symfony\Component\Translation\TranslatorInterface;
 
+/**
+ * Class SimplifyTranslator
+ *
+ * The Default translator added with an option to set a default translation domain
+ * transSimple uses this domain so just the id and optional parameters are necessary
+ *
+ * @package Daemon\SimplifyBundle\Component
+ */
 class SimplifyTranslator extends DataCollectorTranslator {
 
     protected $defaultTranslationDomain;
@@ -26,6 +34,11 @@ class SimplifyTranslator extends DataCollectorTranslator {
 
     public function getDefaultTranslationDomain() {
         return $this->defaultTranslationDomain;
+    }
+
+    public function transSimple($id, array $parameters = array())
+    {
+        return parent::trans($id, $parameters, $this->defaultTranslationDomain);
     }
 
     public function trans($id, array $parameters = array(), $domain = null, $locale = null)
