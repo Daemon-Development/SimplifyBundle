@@ -81,6 +81,10 @@ abstract class SimplifyController extends Controller
             else {
                 $action = $this->generateUrl($route, $parameters);
             }
+            $customMethod = $options->getMethod();
+            if (!isset($customMethod)) {
+                $options->setMethod(RouterContext::guessMethodByRoute($route));
+            }
         }
 
 
