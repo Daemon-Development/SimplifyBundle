@@ -2,7 +2,10 @@
 
 namespace Daemon\SimplifyBundle\Component;
 
-class RouterContext {
+use Daemon\SimplifyBundle\Component\Enum\HTTP;
+
+class RouterContext
+{
 
     public static $INDEX;
     public static $CREATE;
@@ -11,9 +14,15 @@ class RouterContext {
     public static $DELETE;
 
 
-    public static function setContext(array $viewContext) {
+    /**
+     * Sets the view context with the default values or the one configured inside the config.yml
+     *
+     * @param array $viewContext
+     */
+    public static function setContext(array $viewContext)
+    {
         foreach ($viewContext as $key => $value) {
-            switch($key) {
+            switch ($key) {
                 case "INDEX": {
                     self::$INDEX = $value;
                     break;
@@ -36,12 +45,13 @@ class RouterContext {
 
 
     /**
-     * The name of the route will be matched against the defined ViewTypes
+     * Guesses the view context by the name of the route
      *
      * @param string $route
      * @return string
      */
-    public static function getViewTypeByRoute($route) {
+    public static function guessViewContextByRoute($route)
+    {
         switch ($route) {
             case (strpos($route, self::$INDEX) !== false): {
                 return self::$INDEX;
@@ -57,6 +67,34 @@ class RouterContext {
             }
             case (strpos($route, self::$DELETE) !== false): {
                 return self::$DELETE;
+            }
+        }
+        return false;
+    }
+
+    /**
+     * Guesses the HTTP request method by the name of the route
+     *
+     * @param $route
+     * @return bool|string
+     */
+    public static function guessMethodByRoute($route)
+    {
+        switch ($route) {
+            case (strpos($route, self::$INDEX) !== false): {
+                return HTTP::GET;
+            }
+            case (strpos($route, self::$CREATE) !== false): {
+                return HTTP::POST;
+            }
+            case (strpos($route, self::$SHOW) !== false): {
+                return HTTP::GET;
+            }
+            case (strpos($route, self::$UPDATE) !== false): {
+                return HTTP::PUT;
+            }
+            case (strpos($route, self::$DELETE) !== false): {
+                return HTTP::DELETE;
             }
         }
         return false;
