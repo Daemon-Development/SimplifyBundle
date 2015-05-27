@@ -2,8 +2,10 @@
 
 namespace Daemon\SimplifyBundle\Controller;
 
+use Daemon\SimplifyBundle\Component\Enum\HTTP;
 use Daemon\SimplifyBundle\Component\Enum\SyncType;
 use Daemon\SimplifyBundle\Component\Enum\TranslationDomain;
+use Daemon\SimplifyBundle\Component\Enum\ViewContext;
 use Daemon\SimplifyBundle\Component\FormOptions;
 use Daemon\SimplifyBundle\Component\RouterContext;
 use Daemon\SimplifyBundle\Interfaces\EntityInterface;
@@ -64,26 +66,32 @@ abstract class SimplifyController extends Controller
         if (!isset($options)) {
             $options = new FormOptions();
             $parameters = array();
-            $action = $this->generateUrl($route, $parameters);
         }
         else {
             $parameters = $options->getRouteParameters();
+            $method = RouterContext::guessMethodByRoute($route);
+            $viewContext = RouterContext::guessViewContextByRoute($route);
+
             $customRoute = $options->getRoute();
             if (isset($customRoute)) {
-                $action = $this->generateUrl($customRoute, $parameters);
+                $route = $customRoute;
+                // sets the method to the guessed value if the existing method value is not the default value
+                if ($method && $method != $options->getMethod() && $options->getMethod() == HTTP::GET)  {
+                    $options->setMethod($method);
+                }
+                // sets the ViewContext to the guessed value if the existing ViewContext value is not the default value
+                if ($viewContext && $viewContext != $options->getViewContext() && $options->getViewContext() == ViewContext::CREATE)  {
+                    $options->setMethod($method);
+                }
             }
             else {
-                $action = $this->generateUrl($route, $parameters);
-            }
-            $customMethod = $options->getMethod();
-            if (!isset($customMethod)) {
-                $options->setMethod(RouterContext::guessMethodByRoute($route));
+                $options->setMethod($method);
+                $options->setViewContext($viewContext);
             }
         }
 
-
         $form = $this->createForm($formType, $entity, array(
-            'action' => $action,
+            'action' => $this->generateUrl($route, $parameters),
             'method' => $options->getMethod(),
             'options' => $options,
         ));

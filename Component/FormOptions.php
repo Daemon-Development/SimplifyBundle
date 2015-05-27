@@ -3,6 +3,7 @@
 namespace Daemon\SimplifyBundle\Component;
 
 use Daemon\SimplifyBundle\Component\Enum\HTTP;
+use Daemon\SimplifyBundle\Component\Enum\ViewContext;
 
 /**
  * Helper class to hold the options transmittable to the form
@@ -23,6 +24,12 @@ class FormOptions {
      * @var string
      */
     private $method = HTTP::GET;
+
+    /**
+     * The context in which the form template will be
+     * @var string
+     */
+    private $viewContext = ViewContext::CREATE;
 
     /**
      * VariableBag which will be transmitted to the FormType-class
@@ -86,6 +93,27 @@ class FormOptions {
         return $this->method;
     }
 
+
+    /**
+     * Set ViewContext
+     *
+     * @param string $viewContext
+     * @return $this
+     */
+    public function setViewContext($viewContext = ViewContext::CREATE) {
+        $this->viewContext = $viewContext;
+
+        return $this;
+    }
+
+    /**
+     * Get ViewContext
+     *
+     * @return string
+     */
+    public function getViewContext() {
+        return $this->viewContext;
+    }
 
     /**
      * Add a variable to the bag so it will be processed to the FormType
