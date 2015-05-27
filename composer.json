@@ -9,11 +9,11 @@
   "authors": [
     {
       "name": "Christian Hessel",
-      "homepage": "http://github.com/Daemon-Development/"
+      "homepage": "https://github.com/Nickolaus"
     },
     {
       "name": "Symfony Community",
-      "homepage": "http://github.com/barelon/CgKintBundle"
+      "homepage": "http://github.com/Daemon-Development"
     }
   ],
 
@@ -25,7 +25,7 @@
   "minimum-stability": "dev",
 
   "autoload": {
-    "psr-0": {
+    "psr-4": {
       "Daemon\\SimplifyBundle\\": ""
     }
   }
