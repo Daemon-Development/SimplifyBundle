@@ -29,7 +29,7 @@ class FormOptions {
         return $this->route;
     }
 
-    public function setMethod($method = HTTP_METH_GET) {
+    public function setMethod($method = HTTP::GET) {
         $this->method = $method;
 
         return $this;
