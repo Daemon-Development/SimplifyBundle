@@ -4,5 +4,5 @@ namespace Daemon\SimplifyBundle\Component\Enum;
 
 abstract class TranslationDomain extends Enum {
 
-    const SIMPIFIY = 'Simplify';
+    const SIMPlIFY = 'Simplify';
 }
