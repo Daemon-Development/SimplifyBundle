@@ -2,6 +2,7 @@
 
 namespace Daemon\SimplifyBundle\Form;
 
+use Daemon\SimplifyBundle\Component\FormOptions;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
@@ -17,7 +18,7 @@ abstract class SimplifyType extends AbstractType {
     {
         parent::configureOptions($resolver);
         $resolver->setDefaults(array(
-            'options' => array(),
+            'options' => new FormOptions(),
         ));
 
     }
