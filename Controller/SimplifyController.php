@@ -73,21 +73,20 @@ abstract class SimplifyController extends Controller
             $viewContext = RouterContext::guessViewContextByRoute($route);
 
             $customRoute = $options->getRoute();
-            if (isset($customRoute)) {
+            if ($customRoute) {
                 $route = $customRoute;
-                // sets the method to the guessed value if the existing method value is not the default value
-                if ($method && $method != $options->getMethod() && $options->getMethod() == HTTP::GET)  {
-                    $options->setMethod($method);
-                }
-                // sets the ViewContext to the guessed value if the existing ViewContext value is not the default value
-                if ($viewContext && $viewContext != $options->getViewContext() && $options->getViewContext() == ViewContext::CREATE)  {
-                    $options->setMethod($method);
-                }
             }
-            else {
+
+            // sets the method to the guessed value if the existing method value is not the default value
+            if ($method && $method != $options->getMethod() && $options->getMethod() == HTTP::GET)  {
                 $options->setMethod($method);
+            }
+
+            // sets the ViewContext to the guessed value if the existing ViewContext value is not the default value
+            if ($viewContext && $viewContext != $options->getViewContext() && $options->getViewContext() == ViewContext::CREATE)  {
                 $options->setViewContext($viewContext);
             }
+
         }
 
         $form = $this->createForm($formType, $entity, array(
