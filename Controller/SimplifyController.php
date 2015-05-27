@@ -28,7 +28,7 @@ abstract class SimplifyController extends Controller
 
 
     /**
-     * Sets the container, initializes the entityManager
+     * Sets the container, loads configuration, initializes the entityManager and translator
      *
      * @param ContainerInterface $container
      */
@@ -38,7 +38,7 @@ abstract class SimplifyController extends Controller
         $this->loadParameters();
         $this->em = $this->getDoctrine()->getManager();
         $this->trans = $this->container->get('daemon_simplify_translator');
-        $this->trans->setDefaultTranslationDomain(TranslationDomain::SIMPIFIY);
+        $this->trans->setDefaultTranslationDomain(TranslationDomain::SIMPlIFY);
 
     }
 
@@ -47,12 +47,6 @@ abstract class SimplifyController extends Controller
 
         return $this;
     }
-
-    private function loadParameters() {
-        $viewContext = $this->container->getParameter('daemon_simplify.view_context');
-        RouterContext::setContext($viewContext);
-    }
-
 
     /**
      *  Creates a new or update form
@@ -120,22 +114,22 @@ abstract class SimplifyController extends Controller
 
 
     /**
-     * Checks if entity exists, if not adds an error message to the flashbag
+     * Checks if entity exists, if not adds an error message to the error flash-bag
      *
      * usage:
-     *  $result = $this->entityExists(new BaseEntity($entity, EntityTypeInterface::...), $id);
+     *  $result = $this->entityExists($entity, $request, $id);
      *  if (is_string($result)) {
      *      return $this->redirect($result);
      *  }
      *
      * @param EntityInterface $entity
-     * @param $id
+     * @param Request $request
      * @return bool|string
      */
     protected function entityExists(EntityInterface $entity, Request $request, $id)
     {
         if (!isset($entity)) {
-            $errorMessage = $this->trans->trans('entity.error.notFound', array('%className%' => get_class($entity), '%id%' => $id));
+            $errorMessage = $this->trans->transSimple('entity.error.notFound', array('%className%' => get_class($entity), '%id%' => $id));
             $errorFlashBag = $this->get('session')->getFlashBag()->get('error');
 
             if (!in_array($errorMessage, $errorFlashBag)) {
@@ -147,5 +141,12 @@ abstract class SimplifyController extends Controller
     }
 
 
+    /**
+     * Loads parameters from the configuration
+     */
+    private function loadParameters() {
+        $viewContext = $this->container->getParameter('daemon_simplify.view_context');
+        RouterContext::setContext($viewContext);
+    }
 
 }
