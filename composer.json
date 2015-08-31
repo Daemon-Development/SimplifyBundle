@@ -22,7 +22,7 @@
     "symfony/framework-bundle": ">=2.7.0"
   },
 
-  "minimum-stability": "dev",
+  "minimum-stability": "stable",
 
   "autoload": {
     "psr-0": {
